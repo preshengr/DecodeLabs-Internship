@@ -287,6 +287,122 @@ ul {
   transform: translateY(-1px);
 }
 
+/* ── Mobile Hamburger Navigation (CSS-only) ── */
+.nav-menu {
+  display: none; /* shown on small screens */
+}
+
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.burger,
+.burger::before,
+.burger::after {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: 2px;
+  transition:
+    transform 0.22s ease,
+    opacity 0.18s ease;
+}
+
+.burger::before,
+.burger::after {
+  content: "";
+}
+
+.burger::before {
+  transform: translateY(-7px);
+}
+
+.burger::after {
+  transform: translateY(6px);
+}
+
+/* When the <details> is open, animate burger to an X */
+details[open] .burger {
+  transform: rotate(45deg);
+}
+details[open] .burger::before {
+  transform: rotate(-90deg) translateX(-1px);
+}
+details[open] .burger::after {
+  opacity: 0;
+}
+
+.nav-panel {
+  display: none; /* shown when details open on small screens */
+}
+
+.nav-links-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nav-links-mobile .nav-link {
+  padding: 10px 12px;
+  color: var(--color-text);
+  background: transparent;
+  border-radius: 8px;
+}
+
+.nav-cta-mobile {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 10px 18px;
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    display: block;
+    margin-left: 8px;
+  }
+  .nav-menu summary {
+    list-style: none;
+    -webkit-user-select: none;
+    user-select: none;
+    outline: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 8px;
+  }
+  details .nav-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: absolute;
+    top: calc(var(--nav-height));
+    right: 16px;
+    left: 16px;
+    background: linear-gradient(
+      135deg,
+      var(--color-surface),
+      var(--color-surface-2)
+    );
+    border: 1px solid var(--color-border);
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  }
+  /* slightly reduce desktop link prominence on mobile */
+  .nav-links-mobile .nav-link:hover,
+  .nav-links-mobile .nav-link.active {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--color-primary);
+  }
+}
+
 /* ── Buttons ── */
 .btn {
   display: inline-flex;
