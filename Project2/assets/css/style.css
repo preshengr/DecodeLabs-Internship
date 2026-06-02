@@ -1701,29 +1701,29 @@ details[open] .burger::after {
      - DESKTOP LAYER  → @media (min-width: 768px)   high-res assets & columns
      - WIDE LAYER     → @media (min-width: 1024px)  full desktop experience
    
-   Breakpoints follow "Breakpoints are Bridges, Not Fences" (Slide 9):
+   Breakpoints follow "Breakpoints are Bridges, Not Fences":
      0px   → Mobile Core (base CSS, no media query needed)
      480px → Large phone / small tablet
      768px → Tablet (layout enhancements kick in)
      1024px→ Desktop (high-res assets, multi-column)
    
-   Fluid Typography uses clamp() (Slide 13):
+   Fluid Typography uses clamp()
      font-size: clamp(MIN, FLUID_VW, MAX)
    
-   Navigation uses the Hamburger / Popover API (Slide 14):
+   Navigation uses the Hamburger / Popover API :
      - CSS-only popover via <nav popover> + <button popovertarget>
      - JS fallback class toggle also provided for older browsers
    
-   Touch targets: minimum 44px × 44px (Slide 15).
-   Accessibility: user-scalable not blocked (Slide 16).
-   Grid + Flexbox harmony (Slide 12): 
+   Touch targets: minimum 44px × 44px.
+   Accessibility: user-scalable not blocked.
+   Grid + Flexbox harmony : 
      Grid = page macro structure | Flexbox = component micro alignment
    =================================================================*/
 
 /* -----------------------------------------------------------------
    ① VIEWPORT META REMINDER (add to every HTML <head>):
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      NOTE: Never add user-scalable=no — WCAG violation (Slide 16)
+      NOTE: Never add user-scalable=no — WCAG violation
    ----------------------------------------------------------------- */
 
 /* -----------------------------------------------------------------
@@ -1751,7 +1751,7 @@ details[open] .burger::after {
   --text-4xl: clamp(2rem, 5vw, 3.5rem);
   --text-hero: clamp(2.2rem, 6vw, 5rem);
 
-  /* Touch target minimum — Slide 15 */
+  /* Touch target minimum */
   --touch-target: 44px;
 
   /* Mobile nav height (smaller on mobile) */
@@ -1761,7 +1761,7 @@ details[open] .burger::after {
 /* -----------------------------------------------------------------
    ③ MOBILE-FIRST BASE CSS — Mobile Core (0px and up)
       Everything here is the default. Desktop is an enhancement.
-      Principle: "Complexity Increases with Space" (Slide 8)
+      Principle: "Complexity Increases with Space".
    ----------------------------------------------------------------- */
 
 /* Base body font uses fluid scale */
@@ -1932,7 +1932,7 @@ body {
 
 /* -----------------------------------------------------------------
    ④ HAMBURGER / MOBILE NAVIGATION
-      Uses HTML Popover API (Slide 14) — No JS required for modern browsers.
+      Uses HTML Popover API  — No JS required for modern browsers.
       JS class-toggle fallback also provided for older support.
       
       HTML STRUCTURE NEEDED (replace existing <nav> in all 4 pages):
@@ -2141,7 +2141,7 @@ body {
 
 /* -----------------------------------------------------------------
    ⑤ BREAKPOINT: 480px — Large phone / small tablet
-      "Tablet (Layout Enhancements)" — Slide 8
+      "Tablet (Layout Enhancements)"
       Minor layout upgrades: 2-col grids for compact cards
    ----------------------------------------------------------------- */
 @media (min-width: 480px) {
@@ -2198,8 +2198,7 @@ body {
 
 /* -----------------------------------------------------------------
    ⑥ BREAKPOINT: 768px — Tablet (full layout enhancements)
-      @media (min-width: 768px) — matches Mobile-First Strategy (Slide 8)
-      Grid + Flexbox harmony (Slide 12) fully engaged here.
+      @media (min-width: 768px) — matches Mobile-First Strategy
    ----------------------------------------------------------------- */
 @media (min-width: 768px) {
   /* ── Nav: show desktop links, hide hamburger ── */
@@ -2282,7 +2281,7 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 80px;
   }
-
+  000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   /* ── Values grid ── */
   .values-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -2342,7 +2341,7 @@ body {
 
 /* -----------------------------------------------------------------
    ⑦ BREAKPOINT: 1024px — Desktop (High-Res Assets)
-      Full desktop experience — Slide 8: "Desktop (High-Res Assets)"
+      Full desktop experience: "Desktop (High-Res Assets)"
    ----------------------------------------------------------------- */
 @media (min-width: 1024px) {
   /* ── Grid-4 full 4-col ── */
@@ -2430,7 +2429,7 @@ body {
 }
 
 /* -----------------------------------------------------------------
-   ⑩ ACCESSIBILITY — Non-Negotiable (Slide 16)
+   ⑩ ACCESSIBILITY — Non-Negotiable.
       - No user-scalable=no in viewport meta
       - Focus styles for keyboard navigation
       - Sufficient color contrast
@@ -2476,7 +2475,7 @@ body {
 }
 
 /* -----------------------------------------------------------------
-   ⑪ TOUCH & POINTER IMPROVEMENTS (Slide 15: Designing for Thumbs)
+   ⑪ TOUCH & POINTER IMPROVEMENTS (Designing for Thumbs)
       Minimum 44×44px touch targets on all interactive elements.
       CTA buttons in "Easy Reach" zone (bottom of screen).
    ----------------------------------------------------------------- */
