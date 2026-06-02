@@ -210,6 +210,7 @@ ul {
   align-items: center;
   justify-content: space-between;
   height: 100%;
+  margin-top: 8px;
 }
 
 .nav-logo {
