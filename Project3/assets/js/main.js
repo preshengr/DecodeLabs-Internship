@@ -5,19 +5,19 @@
  * DecodeLabs Industrial Training Kit | Batch 2026
  * =============================================================================
  *
- * ARCHITECTURE OVERVIEW (IPO Model — Slide 7):
+ * ARCHITECTURE OVERVIEW:
  * ─────────────────────────────────────────────
  *   INPUT   → User events (clicks, keypresses, scroll, page load)
  *   PROCESS → JavaScript functions that evaluate state and apply logic
  *   OUTPUT  → DOM mutations: class toggles, textContent updates, style changes
  *
- * ENGINEERING STANDARDS (Slide 17 — Decoupling):
+ * ENGINEERING STANDARDS:
  * ─────────────────────────────────────────────
  *   - "js-" prefix classes:  used ONLY as JavaScript hooks (never styled in CSS)
  *   - "is-" prefix classes:  used ONLY to represent visual state (CSS handles look)
- *   - const by default, let only when value must mutate (Slide 12)
- *   - No innerHTML for user data — use textContent (Slide 14, XSS security)
- *   - Keep functions small and single-purpose (Slide 13)
+ *   - const by default, let only when value must mutate
+ *   - No innerHTML for user data — use textContent
+ *   - Keep functions small and single-purpose
  *   - All listeners attached after DOMContentLoaded
  *
  * FILE SECTIONS:
@@ -42,7 +42,7 @@
 
 /* =============================================================================
    §1 — UTILITY HELPERS
-   Small, reusable single-purpose functions (Slide 13: keep functions small)
+   Small, reusable single-purpose functions
    ============================================================================= */
 
 /**
@@ -102,7 +102,7 @@ const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
 /* =============================================================================
    §2 — HAMBURGER / MOBILE NAVIGATION
    IPO: click hamburger → toggle is-open on panel → panel slides in/out
-   Uses classList.toggle() — "Dynamic Content & Classes" (Slide 15)
+   Uses classList.toggle() — "Dynamic Content & Classes"
    Decoupled: js-hamburger, js-mobile-panel, js-nav-close are JS hooks only.
    ============================================================================= */
 
@@ -120,7 +120,7 @@ function initMobileNav() {
   // Guard: exit silently if elements don't exist on this page
   if (!hamburger || !panel) return;
 
-  // STATE — Slide 11: "To react properly, the system needs memory"
+  // STATE — "To react properly, the system needs memory"
   let isMenuOpen = false;
 
   /**
@@ -150,7 +150,7 @@ function initMobileNav() {
     hamburger.classList.remove("is-active");
   };
 
-  // Wire INPUT → PROCESS (Slide 10: addEventListener)
+  // Wire INPUT → PROCESS
   on(hamburger, "click", () => {
     isMenuOpen ? closeMenu() : openMenu();
   });
@@ -195,7 +195,7 @@ function initStickyNav() {
     }
   };
 
-  // INPUT: scroll system trigger (Slide 9)
+  // INPUT: scroll system trigger
   on(window, "scroll", handleScroll);
   handleScroll(); // Run once on load to set initial state
 }
@@ -203,7 +203,7 @@ function initStickyNav() {
 /* =============================================================================
    §4 — TYPING EFFECT — hero-eyebrow-text
    IPO: page load → cycle through phrases → update textContent character by character
-   Uses textContent (not innerHTML) — XSS safety (Slide 14)
+   Uses textContent (not innerHTML) — XSS safety
    ============================================================================= */
 
 /**
@@ -244,7 +244,7 @@ function initTypingEffect() {
     if (isDeleting) {
       // DELETING: shorten the displayed text
       charIndex--;
-      el.textContent = currentPhrase.slice(0, charIndex); // textContent = safe (Slide 14)
+      el.textContent = currentPhrase.slice(0, charIndex); // textContent = safe
 
       if (charIndex === 0) {
         // Done deleting — advance to next phrase
@@ -309,7 +309,7 @@ function initCounters() {
       const eased = easeOutQuart(progress);
       const current = lerp(0, target, eased);
 
-      // OUTPUT: update DOM using textContent (safe — Slide 14)
+      // OUTPUT: update DOM using textContent
       el.textContent =
         prefix +
         (isDecimal
@@ -385,7 +385,7 @@ function initScrollReveal() {
 /* =============================================================================
    §7 — ACCORDION FAQ (contact.html)
    IPO: click FAQ item → toggle is-open → expand/collapse answer panel
-   Uses classList.toggle() (Slide 15: Dynamic Content & Classes)
+   Uses classList.toggle()
    Only one item open at a time (single-active state pattern)
    ============================================================================= */
 
@@ -517,7 +517,7 @@ function initPriceAccordion() {
 /* =============================================================================
    §9 — REPAIR FORM VALIDATION & CONFIRMATION (services.html)
    IPO: submit click → validate fields → show error or success state
-   Uses textContent for safe output (Slide 14)
+   Uses textContent for safe output
    Decoupled: js- hooks for JS, is- classes for state
    ============================================================================= */
 
@@ -752,7 +752,7 @@ function initBackToTop() {
 
 /* =============================================================================
    §13 — INIT ORCHESTRATOR
-   DOMContentLoaded ensures DOM is fully parsed before any queries run (Slide 8).
+   DOMContentLoaded ensures DOM is fully parsed before any queries run.
    Each init function is self-contained and guards against missing elements,
    so all functions run safely on every page.
    ============================================================================= */
