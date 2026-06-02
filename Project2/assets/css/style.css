@@ -1573,3 +1573,937 @@ ul {
     padding: 14px 24px;
   }
 }
+
+/* =================================================================
+   PROJECT 2 — RESPONSIVE WEB LAYOUT
+   ================================================================= 
+   HOW TO USE THIS SECTION:
+   This block is a direct continuation of the Project 1 stylesheet.
+   It follows the Mobile-First Strategy 
+     - BASE CSS       → Mobile Core  (0px–479px)   — written below
+     - TABLET BRIDGE  → @media (min-width: 480px)   layout enhancements
+     - DESKTOP LAYER  → @media (min-width: 768px)   high-res assets & columns
+     - WIDE LAYER     → @media (min-width: 1024px)  full desktop experience
+   
+   Breakpoints follow "Breakpoints are Bridges, Not Fences" (Slide 9):
+     0px   → Mobile Core (base CSS, no media query needed)
+     480px → Large phone / small tablet
+     768px → Tablet (layout enhancements kick in)
+     1024px→ Desktop (high-res assets, multi-column)
+   
+   Fluid Typography uses clamp() (Slide 13):
+     font-size: clamp(MIN, FLUID_VW, MAX)
+   
+   Navigation uses the Hamburger / Popover API (Slide 14):
+     - CSS-only popover via <nav popover> + <button popovertarget>
+     - JS fallback class toggle also provided for older browsers
+   
+   Touch targets: minimum 44px × 44px (Slide 15).
+   Accessibility: user-scalable not blocked (Slide 16).
+   Grid + Flexbox harmony (Slide 12): 
+     Grid = page macro structure | Flexbox = component micro alignment
+   =================================================================*/
+
+/* -----------------------------------------------------------------
+   ① VIEWPORT META REMINDER (add to every HTML <head>):
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      NOTE: Never add user-scalable=no — WCAG violation (Slide 16)
+   ----------------------------------------------------------------- */
+
+/* -----------------------------------------------------------------
+   ② FLUID CSS CUSTOM PROPERTIES (override root for fluid scale)
+      These extend the :root block from Project 1.
+      PASTE after the existing :root block in styles.css if preferred,
+      or keep here — the cascade will apply them correctly.
+   ----------------------------------------------------------------- */
+:root {
+  /* Fluid spacing scale using clamp() — Slide 13 principle */
+  --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+  --space-sm: clamp(0.75rem, 1.5vw, 1rem);
+  --space-md: clamp(1rem, 2vw, 1.5rem);
+  --space-lg: clamp(1.5rem, 3vw, 2.5rem);
+  --space-xl: clamp(2rem, 5vw, 4rem);
+  --space-2xl: clamp(3rem, 7vw, 6rem);
+
+  /* Fluid type scale — clamp(min, preferred_vw, max) */
+  --text-sm: clamp(0.8rem, 1.5vw, 0.9rem);
+  --text-base: clamp(0.9rem, 1.8vw, 1rem);
+  --text-lg: clamp(1rem, 2vw, 1.15rem);
+  --text-xl: clamp(1.1rem, 2.5vw, 1.4rem);
+  --text-2xl: clamp(1.3rem, 3vw, 1.9rem);
+  --text-3xl: clamp(1.6rem, 4vw, 2.5rem);
+  --text-4xl: clamp(2rem, 5vw, 3.5rem);
+  --text-hero: clamp(2.2rem, 6vw, 5rem);
+
+  /* Touch target minimum — Slide 15 */
+  --touch-target: 44px;
+
+  /* Mobile nav height (smaller on mobile) */
+  --nav-height-mobile: 64px;
+}
+
+/* -----------------------------------------------------------------
+   ③ MOBILE-FIRST BASE CSS — Mobile Core (0px and up)
+      Everything here is the default. Desktop is an enhancement.
+      Principle: "Complexity Increases with Space" (Slide 8)
+   ----------------------------------------------------------------- */
+
+/* Base body font uses fluid scale */
+body {
+  font-size: var(--text-base);
+}
+
+/* Fluid headings — override static sizes from P1 with clamp() */
+.heading-xl {
+  font-size: var(--text-hero);
+}
+.heading-lg {
+  font-size: var(--text-3xl);
+}
+.heading-md {
+  font-size: var(--text-2xl);
+}
+.heading-sm {
+  font-size: var(--text-xl);
+}
+
+.mapframe {
+  width: 1235px;
+  height: 400px;
+  border: none;
+  border-radius: var(--radius-md);
+}
+
+/* Fluid container padding on mobile */
+.container {
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+}
+
+/* Fluid section spacing */
+.section {
+  padding: var(--space-2xl) 0;
+}
+.section-sm {
+  padding: var(--space-xl) 0;
+}
+
+/* ── Mobile-first Grid Overrides ──
+   By default everything is single column (mobile core).
+   Columns are ADDED at wider breakpoints below.             */
+.grid-2,
+.grid-3,
+.grid-4 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+/* ── Mobile Nav height ── */
+.nav {
+  height: var(--nav-height-mobile);
+}
+
+/* ── Mobile hero padding ── */
+.hero {
+  padding-top: var(--nav-height-mobile);
+  padding-bottom: var(--space-xl);
+  min-height: auto;
+}
+
+.page-hero,
+.services-hero,
+.about-hero {
+  padding-top: calc(var(--nav-height-mobile) + var(--space-2xl));
+  padding-bottom: var(--space-xl);
+}
+
+/* ── Mobile hero visual hidden ── */
+.hero-visual {
+  display: none;
+}
+
+/* ── Mobile hero stats stack ── */
+.hero-stats {
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+}
+
+/* ── Mobile process steps ── */
+.process-steps {
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+.process-steps::before {
+  display: none;
+}
+
+/* ── Mobile contact/appointment grids ── */
+.contact-grid,
+.appointment-grid {
+  grid-template-columns: 1fr;
+}
+
+/* ── Mobile form rows → single col ── */
+.form-row {
+  grid-template-columns: 1fr;
+}
+
+/* ── Mobile service full card ── */
+.service-full-card {
+  grid-template-columns: 1fr;
+}
+
+/* ── Mobile about intro ── */
+.about-intro {
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+/* ── Mobile values grid ── */
+.values-grid {
+  grid-template-columns: 1fr;
+}
+
+/* ── Mobile footer ── */
+.footer-top {
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+.footer-bottom {
+  flex-direction: column;
+  gap: var(--space-md);
+  text-align: center;
+}
+
+/* ── Mobile CTA banner ── */
+.cta-banner {
+  padding: var(--space-xl) var(--space-lg);
+}
+
+/* ── Mobile form card ── */
+.form-card {
+  padding: var(--space-lg);
+}
+
+/* ── Touch targets: ensure 44px minimum (Slide 15) ── */
+.btn,
+.nav-link,
+.nav-cta,
+.footer-link {
+  min-height: var(--touch-target);
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-link {
+  padding: 0 var(--space-sm);
+}
+
+/* ── Mobile price table ── */
+.price-row {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: var(--space-sm) var(--space-md);
+}
+.price-row-amount {
+  font-size: 0.85rem;
+  color: var(--color-primary);
+}
+
+/* -----------------------------------------------------------------
+   ④ HAMBURGER / MOBILE NAVIGATION
+      Uses HTML Popover API (Slide 14) — No JS required for modern browsers.
+      JS class-toggle fallback also provided for older support.
+      
+      HTML STRUCTURE NEEDED (replace existing <nav> in all 4 pages):
+      See updated HTML files. Key elements:
+        - .nav-hamburger  → the ☰ button (popovertarget="mobile-menu")
+        - #mobile-menu    → popover nav panel  
+        - .nav-close      → close button inside panel
+   ----------------------------------------------------------------- */
+
+/* Hide desktop nav links on mobile — shown at 768px+ */
+.nav-links {
+  display: none;
+}
+.nav-cta {
+  display: none;
+} /* hide CTA pill on mobile */
+
+/* Hamburger button */
+.nav-hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: var(--touch-target);
+  height: var(--touch-target);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  padding: 0 10px;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.nav-hamburger:hover {
+  border-color: var(--color-border-active);
+  background: var(--color-primary-dim);
+}
+
+.nav-hamburger-bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: 2px;
+  transition:
+    transform 0.3s,
+    opacity 0.3s;
+}
+
+/* Mobile nav popover panel */
+.nav-mobile-panel {
+  /* Popover API base styles */
+  position: fixed;
+  inset: 0;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--color-bg);
+  border: none;
+  padding: 0;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  /* Hidden by default — Popover API manages open/close */
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(100%);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  overflow-y: auto;
+}
+
+/* When popover is open (Popover API :popover-open or JS .is-open class) */
+.nav-mobile-panel:popover-open,
+.nav-mobile-panel.is-open {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(0);
+  display: flex;
+}
+
+/* Popover backdrop */
+.nav-mobile-panel::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+/* Mobile panel header row */
+.nav-mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+  height: var(--nav-height-mobile);
+}
+
+/* Close button inside panel */
+.nav-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--touch-target);
+  height: var(--touch-target);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--color-text);
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.nav-close:hover {
+  border-color: var(--color-border-active);
+  background: var(--color-primary-dim);
+}
+
+/* Mobile nav links list */
+.nav-mobile-links {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-lg);
+  gap: var(--space-xs);
+  flex: 1;
+}
+
+.nav-mobile-link {
+  display: flex;
+  align-items: center;
+  min-height: var(--touch-target); /* 44px touch target */
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-text-muted);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  transition:
+    color 0.2s,
+    background 0.2s,
+    border-color 0.2s;
+  letter-spacing: -0.01em;
+}
+
+.nav-mobile-link:hover,
+.nav-mobile-link.active {
+  color: var(--color-text);
+  background: var(--color-surface-2);
+  border-color: var(--color-border);
+}
+
+.nav-mobile-link.active {
+  color: var(--color-primary);
+  border-color: var(--color-border-active);
+  background: var(--color-primary-dim);
+}
+
+/* Mobile CTA inside panel */
+.nav-mobile-cta {
+  margin: 0 var(--space-lg) var(--space-xl);
+  padding: 18px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  background: var(--color-primary);
+  color: var(--color-bg);
+  border-radius: var(--radius-md);
+  display: block;
+  min-height: var(--touch-target);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+}
+
+.nav-mobile-cta:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Mobile contact strip at bottom of panel */
+.nav-mobile-contact {
+  padding: var(--space-md) var(--space-lg);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.nav-mobile-contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  padding: 8px 0;
+}
+
+/* -----------------------------------------------------------------
+   ⑤ BREAKPOINT: 480px — Large phone / small tablet
+      "Tablet (Layout Enhancements)" — Slide 8
+      Minor layout upgrades: 2-col grids for compact cards
+   ----------------------------------------------------------------- */
+@media (min-width: 480px) {
+  /* Grid-4 becomes 2-col at 480px */
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Values grid 2-col */
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Process steps: 2×2 grid */
+  .process-steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+
+  /* Hero stats back to row */
+  .hero-stats {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+  }
+
+  /* Price row back to row layout */
+  .price-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Footer 2-col */
+  .footer-top {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .footer-bottom {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  /* Form card more padding */
+  .form-card {
+    padding: var(--space-xl);
+  }
+
+  /* CTA actions stay row */
+  .cta-actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+/* -----------------------------------------------------------------
+   ⑥ BREAKPOINT: 768px — Tablet (full layout enhancements)
+      @media (min-width: 768px) — matches Mobile-First Strategy (Slide 8)
+      Grid + Flexbox harmony (Slide 12) fully engaged here.
+   ----------------------------------------------------------------- */
+@media (min-width: 768px) {
+  /* ── Nav: show desktop links, hide hamburger ── */
+  .nav {
+    height: var(--nav-height);
+  }
+  .nav-links {
+    display: flex;
+  }
+  .nav-cta {
+    display: inline-flex;
+  }
+  .nav-hamburger {
+    display: none;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    min-height: 100vh;
+    padding-top: var(--nav-height);
+    padding-bottom: 0;
+    align-items: center;
+  }
+
+  .hero-visual {
+    display: block;
+  }
+
+  .hero-stats {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 40px;
+    margin-top: 60px;
+    padding-top: 40px;
+  }
+
+  /* ── Page heroes ── */
+  .page-hero,
+  .services-hero,
+  .about-hero {
+    padding-top: calc(var(--nav-height) + var(--space-2xl));
+  }
+
+  /* ── Grid layouts ── */
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  /* ── Process steps: row ── */
+  .process-steps {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+  }
+  .process-steps::before {
+    display: block;
+  }
+
+  /* ── Contact & appointment ── */
+  .contact-grid {
+    grid-template-columns: 1fr 1.6fr;
+    gap: 48px;
+  }
+  .appointment-grid {
+    grid-template-columns: 1fr 1.8fr;
+    gap: 60px;
+  }
+
+  /* ── About intro ── */
+  .about-intro {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 80px;
+  }
+
+  /* ── Values grid ── */
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* ── Form row ── */
+  .form-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* ── Service full card ── */
+  .service-full-card {
+    grid-template-columns: auto 1fr;
+  }
+
+  /* ── Footer 4-col ── */
+  .footer-top {
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 48px;
+  }
+  .footer-bottom {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  /* ── Form card full padding ── */
+  .form-card {
+    padding: 48px;
+  }
+
+  /* ── CTA banner ── */
+  .cta-banner {
+    padding: 64px;
+  }
+
+  /* ── Section spacing ── */
+  .section {
+    padding: 100px 0;
+  }
+  .section-sm {
+    padding: 60px 0;
+  }
+
+  /* ── Price row ── */
+  .price-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 28px;
+  }
+
+  /* ── Nav CTA shown ── */
+  .nav-cta {
+    display: inline-flex;
+  }
+}
+
+/* -----------------------------------------------------------------
+   ⑦ BREAKPOINT: 1024px — Desktop (High-Res Assets)
+      Full desktop experience — Slide 8: "Desktop (High-Res Assets)"
+   ----------------------------------------------------------------- */
+@media (min-width: 1024px) {
+  /* ── Grid-4 full 4-col ── */
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* ── Footer 4-col always ── */
+  .footer-top {
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  }
+
+  /* ── Hero visual fully shown ── */
+  .hero-visual {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 500px;
+    height: 500px;
+  }
+
+  /* ── About image block ── */
+  .about-image-main {
+    height: 400px;
+  }
+
+  /* ── Larger section padding ── */
+  .section {
+    padding: 100px 0;
+  }
+  .section-sm {
+    padding: 60px 0;
+  }
+}
+
+/* -----------------------------------------------------------------
+   ⑧ BREAKPOINT: 1280px — Wide / Ultra-wide
+      Optional enhancement layer for very large screens
+   ----------------------------------------------------------------- */
+@media (min-width: 1280px) {
+  :root {
+    --max-width: 1280px;
+  }
+
+  .hero-content {
+    max-width: 700px;
+  }
+
+  .grid-3 {
+    gap: 32px;
+  }
+  .grid-4 {
+    gap: 24px;
+  }
+}
+
+/* -----------------------------------------------------------------
+   ⑨ FLUID CARD & COMPONENT REFINEMENTS
+      Auto-fit grid pattern from Slide 11:
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
+      Used for service cards and testimonials to be inherently fluid.
+   ----------------------------------------------------------------- */
+
+/* Auto-fit service cards — fluid without breakpoints */
+.services-auto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+
+/* Auto-fit testimonial cards */
+.testimonials-auto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-md);
+}
+
+/* Auto-fit team cards */
+.team-auto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-md);
+}
+
+/* -----------------------------------------------------------------
+   ⑩ ACCESSIBILITY — Non-Negotiable (Slide 16)
+      - No user-scalable=no in viewport meta
+      - Focus styles for keyboard navigation
+      - Sufficient color contrast
+      - Skip-to-content link
+   ----------------------------------------------------------------- */
+
+/* Skip to content — screen reader / keyboard shortcut */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--space-md);
+  background: var(--color-primary);
+  color: var(--color-bg);
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: var(--space-sm);
+}
+
+/* Global focus ring — WCAG 2.4.7 */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Remove default outline only when using mouse */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Ensure interactive elements have sufficient contrast */
+.btn-primary:focus-visible,
+.nav-cta:focus-visible {
+  outline-color: #fff;
+}
+
+/* -----------------------------------------------------------------
+   ⑪ TOUCH & POINTER IMPROVEMENTS (Slide 15: Designing for Thumbs)
+      Minimum 44×44px touch targets on all interactive elements.
+      CTA buttons in "Easy Reach" zone (bottom of screen).
+   ----------------------------------------------------------------- */
+
+/* All interactive elements meet 44px minimum */
+.btn {
+  min-height: var(--touch-target);
+}
+.nav-link {
+  min-height: var(--touch-target);
+}
+.nav-mobile-link {
+  min-height: var(--touch-target);
+}
+.form-input,
+.form-select,
+.form-textarea {
+  min-height: var(--touch-target);
+  padding: 12px 16px;
+}
+.footer-link {
+  min-height: 36px;
+  padding: 6px 0;
+}
+
+/* Increase tap area on price rows */
+.price-row {
+  min-height: 56px;
+}
+
+/* Card hover → also respond to touch (active state) */
+.card:active,
+.service-card:active,
+.service-full-card:active,
+.team-card:active {
+  transform: scale(0.98);
+}
+
+/* -----------------------------------------------------------------
+   ⑫ PRINT MEDIA QUERY
+      Ensure the site prints cleanly (bonus good practice).
+   ----------------------------------------------------------------- */
+@media print {
+  .nav,
+  .nav-hamburger,
+  .nav-mobile-panel,
+  .hero-visual,
+  .cta-banner,
+  .footer-badges {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .card,
+  .service-card,
+  .service-full-card {
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75em;
+    color: #555;
+  }
+}
+
+/* -----------------------------------------------------------------
+   ⑬ REDUCED MOTION — Accessibility (prefers-reduced-motion)
+      Respects user OS preference for less animation.
+   ----------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .hero-visual-ring {
+    animation: none;
+  }
+  .hero-visual-center {
+    animation: none;
+    box-shadow: var(--shadow-glow);
+  }
+}
+
+/* -----------------------------------------------------------------
+   ⑭ DARK MODE PREFERENCE (bonus: system-level dark already matched)
+      Since site is already dark, this handles light-mode override
+      in case the user's system prefers light.
+   ----------------------------------------------------------------- */
+@media (prefers-color-scheme: light) {
+  /* 
+    Site is dark-themed by design. If you want to honour a 
+    light-mode preference in future, add variable overrides here.
+    Currently intentionally left as dark regardless.
+  */
+}
+
+/* -----------------------------------------------------------------
+   ⑮ CONTAINER QUERIES (Future-Proof — Slide 18)
+      "Beyond the Viewport: Container Queries"
+      Allow components to respond to their container width,
+      not just the viewport. Great for reusable card components.
+   ----------------------------------------------------------------- */
+
+/* Opt-in containers */
+.service-card,
+.team-card,
+.testimonial-card,
+.value-card {
+  container-type: inline-size;
+  container-name: card;
+}
+
+/* Card adapts based on its own width, not the viewport */
+@container card (min-width: 300px) {
+  .service-card-title {
+    font-size: 1.2rem;
+  }
+  .service-card-desc {
+    font-size: 0.92rem;
+  }
+  .card-icon {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+@container card (min-width: 400px) {
+  .service-card-title {
+    font-size: 1.3rem;
+  }
+}
+
+/* =================================================================
+   END OF PROJECT 2 — RESPONSIVE WEB LAYOUT CSS
+   ================================================================= */
