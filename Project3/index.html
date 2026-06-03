@@ -26,7 +26,7 @@
        PROJECT 2: Responsive hamburger nav
        PROJECT 3: js-nav (sticky scroll), js-hamburger (mobile toggle)
        ===================================================================== -->
-    <nav class="nav js-nav" role="navigation" aria-label="Main navigation">
+    <nav class="nav js-nav" aria-label="Main navigation">
       <div class="container">
         <div class="nav-inner">
           <!-- Logo -->
@@ -40,7 +40,7 @@
           </a>
 
           <!-- Desktop nav links (hidden on mobile via CSS P2) -->
-          <ul class="nav-links" role="list">
+          <ul class="nav-links">
             <li>
               <a
                 href="index.html"
@@ -199,7 +199,6 @@
                   class="hero-stat-number js-counter"
                   data-target="2400"
                   data-suffix="+"
-                  aria-label="Over 2,400 devices repaired"
                 >
                   0
                 </div>
@@ -210,7 +209,6 @@
                   class="hero-stat-number js-counter"
                   data-target="48"
                   data-suffix="hr"
-                  aria-label="48 hour average turnaround"
                 >
                   0
                 </div>
@@ -221,7 +219,6 @@
                   class="hero-stat-number js-counter"
                   data-target="98"
                   data-suffix="%"
-                  aria-label="98% customer satisfaction rate"
                 >
                   0
                 </div>
@@ -370,7 +367,10 @@
           </div>
           <div class="grid-3">
             <div class="testimonial-card js-reveal">
-              <div class="testimonial-stars" aria-label="5 stars">★★★★★</div>
+              <div class="testimonial-stars" role="img" aria-label="5 stars">
+                <!-- Your individual star icons/SVGs go here -->
+                <span aria-hidden="true">★★★★★</span>
+              </div>
               <p class="testimonial-text">
                 "My iPhone screen was completely shattered. Smart Tech replaced
                 it within 24 hours and it looks brand new. Incredible service!"
@@ -386,7 +386,10 @@
               </div>
             </div>
             <div class="testimonial-card js-reveal">
-              <div class="testimonial-stars" aria-label="5 stars">★★★★★</div>
+              <div class="testimonial-stars" role="img" aria-label="5 stars">
+                <!-- Your individual star icons/SVGs go here -->
+                <span aria-hidden="true">★★★★★</span>
+              </div>
               <p class="testimonial-text">
                 "My laptop wouldn't boot at all. Their team diagnosed a failing
                 SSD, replaced it, and recovered all my data. Truly life savers."
@@ -402,7 +405,10 @@
               </div>
             </div>
             <div class="testimonial-card js-reveal">
-              <div class="testimonial-stars" aria-label="5 stars">★★★★★</div>
+              <div class="testimonial-stars" role="img" aria-label="5 stars">
+                <!-- Your individual star icons/SVGs go here -->
+                <span aria-hidden="true">★★★★★</span>
+              </div>
               <p class="testimonial-text">
                 "Very professional and transparent pricing. I knew exactly what
                 I was paying before the work started. Highly recommend Smart
@@ -449,7 +455,7 @@
     <!-- =====================================================================
        FOOTER
        ===================================================================== -->
-    <footer class="footer" role="contentinfo">
+    <footer class="footer">
       <div class="container">
         <div class="footer-top">
           <div>
