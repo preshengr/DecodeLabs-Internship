@@ -197,115 +197,137 @@
           <!-- RIGHT: Contact Form -->
           <div>
             <div class="form-card">
-              <div class="form-title">Send Us a Message</div>
-              <p class="form-subtitle">
-                Use this form for general enquiries, quotes, or feedback. For
-                repair bookings, use our
-                <a
-                  href="services.html#appointment"
-                  style="color: var(--color-primary)"
-                  >Repair Request form</a
-                >.
-              </p>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label class="form-label" for="c-first-name"
-                    >First Name</label
-                  >
-                  <input
-                    class="form-input"
-                    type="text"
-                    id="c-first-name"
-                    name="first_name"
-                    placeholder="Your first name"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="c-last-name">Last Name</label>
-                  <input
-                    class="form-input"
-                    type="text"
-                    id="c-last-name"
-                    name="last_name"
-                    placeholder="Your last name"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label class="form-label" for="c-phone">Phone Number</label>
-                  <input
-                    class="form-input"
-                    type="tel"
-                    id="c-phone"
-                    name="phone"
-                    placeholder="+234 800 000 0000"
-                  />
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="c-email">Email Address</label>
-                  <input
-                    class="form-input"
-                    type="email"
-                    id="c-email"
-                    name="email"
-                    placeholder="you@example.com"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="c-subject">Subject</label>
-                <select
-                  class="form-select"
-                  id="c-subject"
-                  name="subject"
-                  required
-                >
-                  <option value="" disabled selected>What's this about?</option>
-                  <option value="repair_quote">Repair Quote / Enquiry</option>
-                  <option value="parts_price">
-                    Parts &amp; Accessories Pricing
-                  </option>
-                  <option value="appointment">Appointment Question</option>
-                  <option value="complaint">Complaint / Issue</option>
-                  <option value="compliment">Compliment / Feedback</option>
-                  <option value="partnership">Partnership / Business</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="c-message">Your Message</label>
-                <textarea
-                  class="form-textarea"
-                  id="c-message"
-                  name="message"
-                  style="min-height: 150px"
-                  placeholder="Tell us how we can help you..."
-                  required
-                ></textarea>
-              </div>
-
-              <button class="btn btn-primary btn-lg form-submit" type="submit">
-                ✉️ Send Message
-              </button>
-
-              <p
-                style="
-                  text-align: center;
-                  font-size: 0.78rem;
-                  color: var(--color-text-muted);
-                  margin-top: 16px;
-                "
+              <form
+                action="https://api.web3forms.com/submit"
+                method="POST"
+                id="contact-form"
               >
-                We respond within 2 business hours · Your data is safe with us.
-              </p>
+                <input
+                  type="hidden"
+                  name="access_key"
+                  value="37629eb3-53d8-4f4f-b635-0b29a6e7dbbd"
+                />
+
+                <div class="form-title">Send Us a Message</div>
+                <p class="form-subtitle">
+                  Use this form for general enquiries, quotes, or feedback. For
+                  repair bookings, use our
+                  <a
+                    href="services.html#appointment"
+                    style="color: var(--color-primary)"
+                    >Repair Request form</a
+                  >.
+                </p>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label" for="c-first-name"
+                      >First Name</label
+                    >
+                    <input
+                      class="form-input"
+                      type="text"
+                      id="c-first-name"
+                      name="first_name"
+                      placeholder="Your first name"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="c-last-name"
+                      >Last Name</label
+                    >
+                    <input
+                      class="form-input"
+                      type="text"
+                      id="c-last-name"
+                      name="last_name"
+                      placeholder="Your last name"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label" for="c-phone">Phone Number</label>
+                    <input
+                      class="form-input"
+                      type="tel"
+                      id="c-phone"
+                      name="phone"
+                      placeholder="+234 800 000 0000"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="c-email"
+                      >Email Address</label
+                    >
+                    <input
+                      class="form-input"
+                      type="email"
+                      id="c-email"
+                      name="email"
+                      placeholder="you@example.com"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="c-subject">Subject</label>
+                  <select
+                    class="form-select"
+                    id="c-subject"
+                    name="subject"
+                    required
+                  >
+                    <option value="" disabled selected>
+                      What's this about?
+                    </option>
+                    <option value="repair_quote">Repair Quote / Enquiry</option>
+                    <option value="parts_price">
+                      Parts &amp; Accessories Pricing
+                    </option>
+                    <option value="appointment">Appointment Question</option>
+                    <option value="complaint">Complaint / Issue</option>
+                    <option value="compliment">Compliment / Feedback</option>
+                    <option value="partnership">Partnership / Business</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="c-message">Your Message</label>
+                  <textarea
+                    class="form-textarea"
+                    id="c-message"
+                    name="message"
+                    style="min-height: 150px"
+                    placeholder="Tell us how we can help you..."
+                    required
+                  ></textarea>
+                </div>
+
+                <button
+                  class="btn btn-primary btn-lg form-submit"
+                  type="submit"
+                >
+                  ✉️ Send Message
+                </button>
+
+                <p
+                  style="
+                    text-align: center;
+                    font-size: 0.78rem;
+                    color: var(--color-text-muted);
+                    margin-top: 16px;
+                  "
+                >
+                  We respond within 2 business hours · Your data is safe with
+                  us.
+                </p>
+              </form>
             </div>
           </div>
         </div>

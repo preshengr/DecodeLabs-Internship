@@ -782,3 +782,129 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ── §12 Back-to-top (all pages) ── */
   initBackToTop();
 });
+
+/* =============================================================================
+   §14 — WEB3FORMS API INTEGRATION
+   Both repair and contact forms submit to Web3Forms API for backend handling
+   ============================================================================= */
+
+function initWeb3Forms() {
+  // Handle repair form (services.html)
+  const repairForm = document.getElementById("repair-form");
+  if (repairForm) {
+    const submitBtn = repairForm.querySelector('button[type="submit"]');
+    repairForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(repairForm);
+      const originalText = submitBtn.textContent;
+
+      submitBtn.textContent = "Sending...";
+      submitBtn.disabled = true;
+
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: formData,
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          alert("Success! Your repair request has been received. We'll confirm your appointment within 2 hours.");
+          repairForm.reset();
+        } else {
+          alert("Error: " + data.message);
+        }
+      } catch (error) {
+        alert("Something went wrong. Please try again.");
+      } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+  }
+
+  // Handle contact form (contact.html)
+  const contactForm = document.getElementById("contact-form");
+  if (contactForm) {
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    contactForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(contactForm);
+      const originalText = submitBtn.textContent;
+
+      submitBtn.textContent = "Sending...";
+      submitBtn.disabled = true;
+
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: formData,
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          alert("Success! Your message has been sent.");
+          contactForm.reset();
+        } else {
+          alert("Error: " + data.message);
+        }
+      } catch (error) {
+        alert("Something went wrong. Please try again.");
+      } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+  }
+}
+
+/* =============================================================================
+   Init Web3Forms after DOMContentLoaded
+   ============================================================================= */
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initWeb3Forms);
+} else {
+  initWeb3Forms();
+}
+
+const form = document.getElementById("form");
+const submitBtn = form?.querySelector('button[type="submit"]');
+
+if (form) {
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    formData.append("access_key", "37629eb3-53d8-4f4f-b635-0b29a6e7dbbd");
+
+    const originalText = submitBtn.textContent;
+
+    submitBtn.textContent = "Sending...";
+    submitBtn.disabled = true;
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Success! Your message has been sent.");
+        form.reset();
+      } else {
+        alert("Error: " + data.message);
+      }
+    } catch (error) {
+      alert("Something went wrong. Please try again.");
+    } finally {
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    }
+  });
+}
