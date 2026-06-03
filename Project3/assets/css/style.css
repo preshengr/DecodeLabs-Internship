@@ -789,6 +789,15 @@ details[open] .burger::after {
   margin-bottom: 32px;
 }
 
+.price-table-section summary {
+  list-style: none;
+}
+
+.price-table-section summary::marker,
+.price-table-section summary::-webkit-details-marker {
+  display: none;
+}
+
 .price-table-header {
   background: linear-gradient(
     135deg,
@@ -818,11 +827,20 @@ details[open] .burger::after {
 }
 
 .price-table-header-title {
+  all: unset;
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 700;
   color: var(--color-text);
   flex: 1;
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+}
+
+.price-table-header-title:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
 }
 
 .price-table-header-chevron {
@@ -838,22 +856,17 @@ details[open] .burger::after {
   justify-content: space-between;
   padding: 16px 28px;
   border-bottom: 1px solid var(--color-border);
-  transition:
-    background 0.2s,
-    opacity 0.3s ease,
-    max-height 0.3s ease;
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  padding-top: 0;
-  padding-bottom: 0;
+  transition: background 0.2s;
+  text-decoration: none;
+  color: inherit;
 }
 
-.price-table-section.active .price-row {
-  opacity: 1;
-  max-height: 200px;
-  padding-top: 16px;
-  padding-bottom: 16px;
+.price-row:last-child {
+  border-bottom: none;
+}
+
+.price-table-section[open] .price-table-header-chevron {
+  transform: rotate(90deg);
 }
 
 .price-row:last-child {
