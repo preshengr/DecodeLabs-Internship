@@ -2,34 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- PROJECT 2: viewport meta "The Key to the Kingdom" -->
-    <!-- Never add user-scalable=no-->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Smart Tech Limited — Gadget Repair Experts, Abuja</title>
     <meta
       name="description"
       content="Professional phone, laptop and tablet repair services in Abuja, Nigeria. Book an appointment today."
     />
-    <!-- PROJECT 1: Single external CSS file (Separation of Concerns) -->
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body class="bg-noise">
-    <!-- =====================================================================
-       ACCESSIBILITY: Skip-to-content link
-        - Visible on keyboard focus, hidden visually otherwise (CSS)
-        - Links directly to main content for screen readers and keyboard users  
-       ===================================================================== -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- =====================================================================
-       NAVIGATION
-       PROJECT 2: Responsive hamburger nav
-       PROJECT 3: js-nav (sticky scroll), js-hamburger (mobile toggle)
-       ===================================================================== -->
+    <!-- Navigation -->
     <nav class="nav js-nav" aria-label="Main navigation">
       <div class="container">
         <div class="nav-inner">
-          <!-- Logo -->
           <a
             href="index.html"
             class="nav-logo"
@@ -39,7 +26,6 @@
             <span class="nav-logo-text">Smart<span>Tech</span></span>
           </a>
 
-          <!-- Desktop nav links (hidden on mobile via CSS P2) -->
           <ul class="nav-links">
             <li>
               <a
@@ -58,10 +44,8 @@
             </li>
           </ul>
 
-          <!-- Desktop CTA (hidden on mobile) -->
           <a href="services.html#appointment" class="nav-cta">Book Repair</a>
 
-          <!-- Hamburger button — PROJECT 3: js-hamburger hook, aria-expanded updated by JS -->
           <button
             class="nav-hamburger js-hamburger"
             aria-label="Open navigation menu"
@@ -76,10 +60,7 @@
       </div>
     </nav>
 
-    <!-- =====================================================================
-       MOBILE NAV PANEL
-       PROJECT 3: js-mobile-panel, is-open toggled
-       ===================================================================== -->
+    <!-- Mobile Menu -->
     <div
       class="nav-mobile-panel js-mobile-panel"
       id="mobile-menu"
@@ -88,13 +69,11 @@
       aria-label="Navigation menu"
       aria-hidden="true"
     >
-      <!-- Panel header -->
       <div class="nav-mobile-header">
         <a href="index.html" class="nav-logo" aria-label="Smart Tech Limited">
           <div class="nav-logo-icon" aria-hidden="true">🔧</div>
           <span class="nav-logo-text">Smart<span>Tech</span></span>
         </a>
-        <!-- Close button — js-nav-close hook -->
         <button
           class="nav-close js-nav-close"
           aria-label="Close navigation menu"
@@ -103,7 +82,6 @@
         </button>
       </div>
 
-      <!-- Mobile nav links — js-mobile-link closes panel on click -->
       <nav class="nav-mobile-links" aria-label="Mobile navigation">
         <a
           href="index.html"
@@ -120,12 +98,10 @@
         >
       </nav>
 
-      <!-- Mobile CTA -->
       <a href="services.html#appointment" class="nav-mobile-cta js-mobile-link"
         >📅 Book a Repair</a
       >
 
-      <!-- Contact strip -->
       <div class="nav-mobile-contact">
         <div class="nav-mobile-contact-item">
           <span aria-hidden="true">📞</span>
@@ -138,19 +114,13 @@
       </div>
     </div>
 
-    <!-- =====================================================================
-       MAIN CONTENT
-       ===================================================================== -->
+    <!-- Main Content -->
     <main id="main-content">
-      <!-- ==================================================================
-         HERO SECTION
-         PROJECT 3: js-typing-text (typing effect §4), js-counter (stats §5)
-         ================================================================== -->
+      <!-- Hero Section -->
       <section class="hero" aria-labelledby="hero-heading">
         <div class="hero-bg" aria-hidden="true"></div>
         <div class="hero-grid-lines" aria-hidden="true"></div>
 
-        <!-- Animated visual rings (decorative) -->
         <div class="hero-visual" aria-hidden="true">
           <div class="hero-visual-ring hero-visual-ring-1"></div>
           <div class="hero-visual-ring hero-visual-ring-2"></div>
@@ -161,10 +131,8 @@
 
         <div class="container">
           <div class="hero-content">
-            <!-- Eyebrow — PROJECT 3: js-typing-text for continuous typing effect (§4) -->
             <div class="hero-eyebrow">
               <div class="hero-eyebrow-line" aria-hidden="true"></div>
-              <!-- js-typing-text: JS will cycle phrases here via textContent -->
               <span class="hero-eyebrow-text js-typing-text" aria-live="polite">
                 Abuja's Premier Repair Hub
               </span>
@@ -191,8 +159,6 @@
               </a>
             </div>
 
-            <!-- Stats — PROJECT 3: js-counter animates from 0 to target (§5)
-               data-target: final number | data-suffix: unit appended after -->
             <div class="hero-stats">
               <div class="hero-stat">
                 <div
@@ -229,9 +195,7 @@
         </div>
       </section>
 
-      <!-- ==================================================================
-         WHAT WE FIX — js-reveal scroll animation (§6)
-         ================================================================== -->
+      <!-- Services Section -->
       <section class="section" aria-labelledby="services-heading">
         <div class="container">
           <div class="section-header-centered js-reveal">
@@ -294,9 +258,7 @@
         </div>
       </section>
 
-      <!-- ==================================================================
-         HOW IT WORKS
-         ================================================================== -->
+      <!-- Process Section -->
       <section
         class="section"
         style="
@@ -354,9 +316,7 @@
         </div>
       </section>
 
-      <!-- ==================================================================
-         TESTIMONIALS
-         ================================================================== -->
+      <!-- Testimonials Section -->
       <section class="section" aria-labelledby="testimonials-heading">
         <div class="container">
           <div class="section-header-centered js-reveal">
@@ -368,7 +328,6 @@
           <div class="grid-3">
             <div class="testimonial-card js-reveal">
               <div class="testimonial-stars" role="img" aria-label="5 stars">
-                <!-- Your individual star icons/SVGs go here -->
                 <span aria-hidden="true">★★★★★</span>
               </div>
               <p class="testimonial-text">
@@ -387,7 +346,6 @@
             </div>
             <div class="testimonial-card js-reveal">
               <div class="testimonial-stars" role="img" aria-label="5 stars">
-                <!-- Your individual star icons/SVGs go here -->
                 <span aria-hidden="true">★★★★★</span>
               </div>
               <p class="testimonial-text">
@@ -406,7 +364,6 @@
             </div>
             <div class="testimonial-card js-reveal">
               <div class="testimonial-stars" role="img" aria-label="5 stars">
-                <!-- Your individual star icons/SVGs go here -->
                 <span aria-hidden="true">★★★★★</span>
               </div>
               <p class="testimonial-text">
@@ -428,9 +385,7 @@
         </div>
       </section>
 
-      <!-- ==================================================================
-         CTA BANNER
-         ================================================================== -->
+      <!-- CTA Banner -->
       <section class="section-sm">
         <div class="container">
           <div class="cta-banner js-reveal">
@@ -452,9 +407,7 @@
       </section>
     </main>
 
-    <!-- =====================================================================
-       FOOTER
-       ===================================================================== -->
+    <!-- Footer -->
     <footer class="footer">
       <div class="container">
         <div class="footer-top">
@@ -521,18 +474,11 @@
       </div>
     </footer>
 
-    <!-- =====================================================================
-       BACK-TO-TOP BUTTON
-       PROJECT 3: js-back-to-top — is-visible toggled by §12 of main.js
-       ===================================================================== -->
+    <!-- Back to Top Button -->
     <button class="back-to-top js-back-to-top" aria-label="Back to top">
       ↑
     </button>
 
-    <!-- =====================================================================
-       PROJECT 3: Single shared JavaScript file (Slide 17 — Decoupling)
-       defer: script runs after HTML is parsed (equivalent to DOMContentLoaded)
-       ===================================================================== -->
     <script src="./assets/js/main.js" defer></script>
   </body>
 </html>
