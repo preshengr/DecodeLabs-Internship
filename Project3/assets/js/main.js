@@ -458,53 +458,44 @@ function initFaqAccordion() {
 
 /**
  * initPriceAccordion
- * Makes each .js-price-table a collapsible accordion panel.
- * Click header to expand/collapse the price rows inside.
+ * Makes each .price-table-section a collapsible dropdown menu.
+ * Click .price-table-header to toggle .price-row visibility.
+ * First table is open by default, others collapsed.
  */
 function initPriceAccordion() {
-  const priceTables = $$(".js-price-table");
-  if (!priceTables.length) return;
+  const sections = $$(".price-table-section");
+  if (!sections.length) return;
 
-  priceTables.forEach((table, index) => {
-    const header = $(".js-price-header", table);
-    const body = $(".js-price-body", table);
-    const icon = $(".js-price-icon", table);
+  sections.forEach((section, index) => {
+    const header = $(".price-table-header", section);
 
-    if (!header || !body) return;
+    if (!header) return;
 
     // STATE: first table open by default
     if (index === 0) {
-      table.classList.add("is-open");
-      body.style.maxHeight = body.scrollHeight + "px";
-      if (icon) icon.textContent = "−";
+      section.classList.add("active");
       header.setAttribute("aria-expanded", "true");
     } else {
-      body.style.maxHeight = "0px";
-      if (icon) icon.textContent = "+";
       header.setAttribute("aria-expanded", "false");
     }
 
     // INPUT: click header
     on(header, "click", () => {
-      const isOpen = table.classList.contains("is-open");
+      const isActive = section.classList.contains("active");
 
       // PROCESS: toggle state
-      if (isOpen) {
+      if (isActive) {
         // OUTPUT: collapse
-        table.classList.remove("is-open");
-        body.style.maxHeight = "0px";
-        if (icon) icon.textContent = "+";
+        section.classList.remove("active");
         header.setAttribute("aria-expanded", "false");
       } else {
         // OUTPUT: expand
-        table.classList.add("is-open");
-        body.style.maxHeight = body.scrollHeight + "px";
-        if (icon) icon.textContent = "−";
+        section.classList.add("active");
         header.setAttribute("aria-expanded", "true");
       }
     });
 
-    // Keyboard support
+    // Keyboard support for accessibility
     on(header, "keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();

@@ -800,6 +800,17 @@ details[open] .burger::after {
   display: flex;
   align-items: center;
   gap: 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+
+.price-table-header:hover {
+  background: linear-gradient(
+    135deg,
+    var(--color-surface),
+    var(--color-surface-2)
+  );
 }
 
 .price-table-header-icon {
@@ -811,6 +822,14 @@ details[open] .burger::after {
   font-size: 1rem;
   font-weight: 700;
   color: var(--color-text);
+  flex: 1;
+}
+
+.price-table-header-chevron {
+  font-size: 1.2rem;
+  color: var(--color-primary);
+  transition: transform 0.3s ease;
+  display: inline-block;
 }
 
 .price-row {
@@ -819,7 +838,22 @@ details[open] .burger::after {
   justify-content: space-between;
   padding: 16px 28px;
   border-bottom: 1px solid var(--color-border);
-  transition: background 0.2s;
+  transition:
+    background 0.2s,
+    opacity 0.3s ease,
+    max-height 0.3s ease;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.price-table-section.active .price-row {
+  opacity: 1;
+  max-height: 200px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 .price-row:last-child {
@@ -847,6 +881,11 @@ details[open] .burger::after {
   font-weight: 700;
   color: var(--color-primary);
   white-space: nowrap;
+}
+
+/* Dropdown active state */
+.price-table-section.active .price-table-header-chevron {
+  transform: rotate(90deg);
 }
 
 /* ── Process Steps ── */
