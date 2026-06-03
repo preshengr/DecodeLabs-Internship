@@ -48,8 +48,8 @@
               <a href="#appointment" class="nav-cta nav-cta-mobile"
                 >Book Repair</a
               >
-            </a>
-        </details>
+            </div>
+          </details>
         </div>
       </div>
     </nav>
@@ -784,201 +784,226 @@
 
           <!-- THE FORM -->
           <div class="form-card">
-            <div class="form-title">Gadget Repair Request</div>
-            <p class="form-subtitle">
-              Tell us about your device and the issue. We'll schedule your
-              repair and send you a pickup date.
-            </p>
+            <form
+              action="https://api.web3forms.com/submit"
+              method="POST"
+              class="appointment-form"
+              id="repair-form"
+            >
+              <input
+                type="hidden"
+                name="access_key"
+                value="37629eb3-53d8-4f4f-b635-0b29a6e7dbbd"
+              />
 
-            <div class="form-row">
+              <div class="form-title">Gadget Repair Request</div>
+              <p class="form-subtitle">
+                Tell us about your device and the issue. We'll schedule your
+                repair and send you a pickup date.
+              </p>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="first-name">First Name</label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="first-name"
+                    name="first_name"
+                    placeholder="e.g. Chukwuemeka"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="last-name">Last Name</label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="last-name"
+                    name="last_name"
+                    placeholder="e.g. Okonkwo"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="phone">Phone Number</label>
+                  <input
+                    class="form-input"
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="+234 800 000 0000"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="email">Email Address</label>
+                  <input
+                    class="form-input"
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="you@example.com"
+                  />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="device-type"
+                    >Device Type</label
+                  >
+                  <select
+                    class="form-select"
+                    id="device-type"
+                    name="device_type"
+                    required
+                  >
+                    <option value="" disabled selected>
+                      Select device type
+                    </option>
+                    <option value="smartphone">Smartphone</option>
+                    <option value="laptop">Laptop</option>
+                    <option value="tablet">Tablet</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="brand">Device Brand</label>
+                  <select class="form-select" id="brand" name="brand" required>
+                    <option value="" disabled selected>Select brand</option>
+                    <option value="apple">
+                      Apple (iPhone / iPad / MacBook)
+                    </option>
+                    <option value="samsung">Samsung</option>
+                    <option value="dell">Dell</option>
+                    <option value="hp">HP</option>
+                    <option value="lenovo">Lenovo</option>
+                    <option value="xiaomi">Xiaomi</option>
+                    <option value="tecno">Tecno</option>
+                    <option value="infinix">Infinix</option>
+                    <option value="itel">Itel</option>
+                    <option value="acer">Acer</option>
+                    <option value="asus">Asus</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+
               <div class="form-group">
-                <label class="form-label" for="first-name">First Name</label>
+                <label class="form-label" for="model"
+                  >Device Model / Name</label
+                >
                 <input
                   class="form-input"
                   type="text"
-                  id="first-name"
-                  name="first_name"
-                  placeholder="e.g. Chukwuemeka"
+                  id="model"
+                  name="device_model"
+                  placeholder="e.g. iPhone 14 Pro, Dell Inspiron 15, iPad Air 5"
                   required
                 />
               </div>
-              <div class="form-group">
-                <label class="form-label" for="last-name">Last Name</label>
-                <input
-                  class="form-input"
-                  type="text"
-                  id="last-name"
-                  name="last_name"
-                  placeholder="e.g. Okonkwo"
-                  required
-                />
-              </div>
-            </div>
 
-            <div class="form-row">
               <div class="form-group">
-                <label class="form-label" for="phone">Phone Number</label>
-                <input
-                  class="form-input"
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  placeholder="+234 800 000 0000"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="email">Email Address</label>
-                <input
-                  class="form-input"
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="you@example.com"
-                />
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label" for="device-type">Device Type</label>
+                <label class="form-label" for="issue-type">Type of Issue</label>
                 <select
                   class="form-select"
-                  id="device-type"
-                  name="device_type"
+                  id="issue-type"
+                  name="issue_type"
                   required
                 >
-                  <option value="" disabled selected>Select device type</option>
-                  <option value="smartphone">Smartphone</option>
-                  <option value="laptop">Laptop</option>
-                  <option value="tablet">Tablet</option>
+                  <option value="" disabled selected>Select main issue</option>
+                  <option value="broken_screen">Broken / Cracked Screen</option>
+                  <option value="battery">Battery / Charging Problem</option>
+                  <option value="water_damage">Water / Liquid Damage</option>
+                  <option value="keyboard">Keyboard / Trackpad Issue</option>
+                  <option value="not_turning_on">Device Not Turning On</option>
+                  <option value="camera">Camera Problem</option>
+                  <option value="software">Software / OS Issue</option>
+                  <option value="speaker_mic">
+                    Speaker / Microphone Problem
+                  </option>
+                  <option value="data_recovery">Data Recovery</option>
+                  <option value="overheating">Overheating</option>
+                  <option value="other">Other (describe below)</option>
                 </select>
               </div>
+
               <div class="form-group">
-                <label class="form-label" for="brand">Device Brand</label>
-                <select class="form-select" id="brand" name="brand" required>
-                  <option value="" disabled selected>Select brand</option>
-                  <option value="apple">Apple (iPhone / iPad / MacBook)</option>
-                  <option value="samsung">Samsung</option>
-                  <option value="dell">Dell</option>
-                  <option value="hp">HP</option>
-                  <option value="lenovo">Lenovo</option>
-                  <option value="xiaomi">Xiaomi</option>
-                  <option value="tecno">Tecno</option>
-                  <option value="infinix">Infinix</option>
-                  <option value="itel">Itel</option>
-                  <option value="acer">Acer</option>
-                  <option value="asus">Asus</option>
+                <label class="form-label" for="description"
+                  >Describe the Problem</label
+                >
+                <textarea
+                  class="form-textarea"
+                  id="description"
+                  name="description"
+                  placeholder="Please describe the issue in detail — when it started, what happens, any recent drops or spills, etc."
+                  required
+                ></textarea>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="appt-date"
+                    >Preferred Appointment Date</label
+                  >
+                  <input
+                    class="form-input"
+                    type="date"
+                    id="appt-date"
+                    name="appointment_date"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="appt-time"
+                    >Preferred Time Slot</label
+                  >
+                  <select
+                    class="form-select"
+                    id="appt-time"
+                    name="appointment_time"
+                    required
+                  >
+                    <option value="" disabled selected>Select time slot</option>
+                    <option value="08:00">8:00 AM – 9:00 AM</option>
+                    <option value="09:00">9:00 AM – 10:00 AM</option>
+                    <option value="10:00">10:00 AM – 11:00 AM</option>
+                    <option value="11:00">11:00 AM – 12:00 PM</option>
+                    <option value="12:00">12:00 PM – 1:00 PM</option>
+                    <option value="13:00">1:00 PM – 2:00 PM</option>
+                    <option value="14:00">2:00 PM – 3:00 PM</option>
+                    <option value="15:00">3:00 PM – 4:00 PM</option>
+                    <option value="16:00">4:00 PM – 5:00 PM</option>
+                    <option value="17:00">5:00 PM – 6:00 PM</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="how-heard"
+                  >How Did You Hear About Us?</label
+                >
+                <select
+                  class="form-select"
+                  id="how-heard"
+                  name="referral_source"
+                >
+                  <option value="" disabled selected>Select an option</option>
+                  <option value="google">Google Search</option>
+                  <option value="social">Social Media</option>
+                  <option value="referral">Friend / Family Referral</option>
+                  <option value="walk_in">Walk-in / Signboard</option>
                   <option value="other">Other</option>
                 </select>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label class="form-label" for="model">Device Model / Name</label>
-              <input
-                class="form-input"
-                type="text"
-                id="model"
-                name="device_model"
-                placeholder="e.g. iPhone 14 Pro, Dell Inspiron 15, iPad Air 5"
-                required
-              />
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="issue-type">Type of Issue</label>
-              <select
-                class="form-select"
-                id="issue-type"
-                name="issue_type"
-                required
-              >
-                <option value="" disabled selected>Select main issue</option>
-                <option value="broken_screen">Broken / Cracked Screen</option>
-                <option value="battery">Battery / Charging Problem</option>
-                <option value="water_damage">Water / Liquid Damage</option>
-                <option value="keyboard">Keyboard / Trackpad Issue</option>
-                <option value="not_turning_on">Device Not Turning On</option>
-                <option value="camera">Camera Problem</option>
-                <option value="software">Software / OS Issue</option>
-                <option value="speaker_mic">
-                  Speaker / Microphone Problem
-                </option>
-                <option value="data_recovery">Data Recovery</option>
-                <option value="overheating">Overheating</option>
-                <option value="other">Other (describe below)</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="description"
-                >Describe the Problem</label
-              >
-              <textarea
-                class="form-textarea"
-                id="description"
-                name="description"
-                placeholder="Please describe the issue in detail — when it started, what happens, any recent drops or spills, etc."
-                required
-              ></textarea>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label" for="appt-date"
-                  >Preferred Appointment Date</label
-                >
-                <input
-                  class="form-input"
-                  type="date"
-                  id="appt-date"
-                  name="appointment_date"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="appt-time"
-                  >Preferred Time Slot</label
-                >
-                <select
-                  class="form-select"
-                  id="appt-time"
-                  name="appointment_time"
-                  required
-                >
-                  <option value="" disabled selected>Select time slot</option>
-                  <option value="08:00">8:00 AM – 9:00 AM</option>
-                  <option value="09:00">9:00 AM – 10:00 AM</option>
-                  <option value="10:00">10:00 AM – 11:00 AM</option>
-                  <option value="11:00">11:00 AM – 12:00 PM</option>
-                  <option value="12:00">12:00 PM – 1:00 PM</option>
-                  <option value="13:00">1:00 PM – 2:00 PM</option>
-                  <option value="14:00">2:00 PM – 3:00 PM</option>
-                  <option value="15:00">3:00 PM – 4:00 PM</option>
-                  <option value="16:00">4:00 PM – 5:00 PM</option>
-                  <option value="17:00">5:00 PM – 6:00 PM</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label" for="how-heard"
-                >How Did You Hear About Us?</label
-              >
-              <select class="form-select" id="how-heard" name="referral_source">
-                <option value="" disabled selected>Select an option</option>
-                <option value="google">Google Search</option>
-                <option value="social">Social Media</option>
-                <option value="referral">Friend / Family Referral</option>
-                <option value="walk_in">Walk-in / Signboard</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-
-            <button class="btn btn-primary btn-lg form-submit" type="submit">
-              📅 Submit Repair Request
-            </button>
+              <button class="btn btn-primary btn-lg form-submit" type="submit">
+                📅 Submit Repair Request
+              </button>
+            </form>
           </div>
         </div>
       </div>
