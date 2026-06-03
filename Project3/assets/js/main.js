@@ -40,11 +40,6 @@
 
 "use strict"; // Enforce strict mode — catches silent errors
 
-/* =============================================================================
-   §1 — UTILITY HELPERS
-   Small, reusable single-purpose functions
-   ============================================================================= */
-
 /**
  * Safe DOM query — returns element or null without throwing.
  * @param {string} selector - CSS selector string
@@ -98,13 +93,6 @@ const lerp = (start, end, t) => start + (end - start) * t;
  * @returns {number}
  */
 const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
-
-/* =============================================================================
-   §2 — HAMBURGER / MOBILE NAVIGATION
-   IPO: click hamburger → toggle is-open on panel → panel slides in/out
-   Uses classList.toggle() — "Dynamic Content & Classes"
-   Decoupled: js-hamburger, js-mobile-panel, js-nav-close are JS hooks only.
-   ============================================================================= */
 
 /**
  * initMobileNav
@@ -173,11 +161,6 @@ function initMobileNav() {
   });
 }
 
-/* =============================================================================
-   §3 — STICKY NAV SCROLL BEHAVIOUR
-   IPO: scroll event → check position → toggle is-scrolled on nav
-   ============================================================================= */
-
 /**
  * initStickyNav
  * Adds visual shadow/background intensity to nav once user scrolls past 80px.
@@ -199,12 +182,6 @@ function initStickyNav() {
   on(window, "scroll", handleScroll);
   handleScroll(); // Run once on load to set initial state
 }
-
-/* =============================================================================
-   §4 — TYPING EFFECT — hero-eyebrow-text
-   IPO: page load → cycle through phrases → update textContent character by character
-   Uses textContent (not innerHTML) — XSS safety
-   ============================================================================= */
 
 /**
  * initTypingEffect
@@ -271,12 +248,6 @@ function initTypingEffect() {
 
   tick(); // Kick off the loop
 }
-
-/* =============================================================================
-   §5 — ANIMATED COUNTER — hero-stat-number
-   IPO: element enters viewport → count from 0 to target → update textContent
-   Uses IntersectionObserver to trigger when stat scrolls into view.
-   ============================================================================= */
 
 /**
  * initCounters
@@ -350,12 +321,6 @@ function initCounters() {
   counters.forEach((counter) => observer.observe(counter));
 }
 
-/* =============================================================================
-   §6 — SCROLL-TRIGGERED REVEAL ANIMATIONS
-   IPO: element enters viewport → add is-visible class → CSS fade-up transition
-   IntersectionObserver replaces scroll event polling (more performant)
-   ============================================================================= */
-
 /**
  * initScrollReveal
  * Adds is-visible to any .js-reveal element once it enters the viewport.
@@ -381,13 +346,6 @@ function initScrollReveal() {
 
   revealEls.forEach((el) => observer.observe(el));
 }
-
-/* =============================================================================
-   §7 — ACCORDION FAQ (contact.html)
-   IPO: click FAQ item → toggle is-open → expand/collapse answer panel
-   Uses classList.toggle()
-   Only one item open at a time (single-active state pattern)
-   ============================================================================= */
 
 /**
  * initFaqAccordion
@@ -449,13 +407,6 @@ function initFaqAccordion() {
   });
 }
 
-/* =============================================================================
-   §8 — ACCORDION PRICE TABLE (services.html)
-   IPO: click price table header → toggle is-open → expand rows
-   Each .js-price-table is independently collapsible.
-   By default the first table is open, rest collapsed.
-   ============================================================================= */
-
 /**
  * initPriceAccordion
  * Makes each .price-table-section a collapsible dropdown menu.
@@ -504,13 +455,6 @@ function initPriceAccordion() {
     });
   });
 }
-
-/* =============================================================================
-   §9 — REPAIR FORM VALIDATION & CONFIRMATION (services.html)
-   IPO: submit click → validate fields → show error or success state
-   Uses textContent for safe output
-   Decoupled: js- hooks for JS, is- classes for state
-   ============================================================================= */
 
 /**
  * initRepairForm
@@ -602,11 +546,6 @@ function initRepairForm() {
   });
 }
 
-/* =============================================================================
-   §10 — CONTACT FORM VALIDATION & CONFIRMATION (contact.html)
-   Same IPO pattern as §9, adapted for the general enquiry form.
-   ============================================================================= */
-
 /**
  * initContactForm
  * Handles the general contact form on contact.html.
@@ -692,11 +631,6 @@ function initContactForm() {
   });
 }
 
-/* =============================================================================
-   §11 — ACTIVE NAV LINK HIGHLIGHTER
-   IPO: page load → compare current URL to link href → add is-active class
-   ============================================================================= */
-
 /**
  * initActiveNav
  * Marks the correct nav link as active based on the current page URL.
@@ -711,11 +645,6 @@ function initActiveNav() {
     }
   });
 }
-
-/* =============================================================================
-   §12 — BACK-TO-TOP BUTTON
-   IPO: scroll past threshold → show button; click → smooth scroll to top
-   ============================================================================= */
 
 /**
  * initBackToTop
@@ -741,52 +670,40 @@ function initBackToTop() {
   });
 }
 
-/* =============================================================================
-   §13 — INIT ORCHESTRATOR
-   DOMContentLoaded ensures DOM is fully parsed before any queries run.
-   Each init function is self-contained and guards against missing elements,
-   so all functions run safely on every page.
-   ============================================================================= */
-
 document.addEventListener("DOMContentLoaded", () => {
-  /* ── §2 Mobile Navigation (all pages) ── */
+  /* Mobile Navigation (all pages) ── */
   initMobileNav();
 
-  /* ── §3 Sticky Nav (all pages) ── */
+  /*  Sticky Nav (all pages) ── */
   initStickyNav();
 
-  /* ── §4 Typing Effect (index.html — guards internally) ── */
+  /* Typing Effect (index.html — guards internally) ── */
   initTypingEffect();
 
-  /* ── §5 Animated Counters (index.html — guards internally) ── */
+  /*  Animated Counters (index.html — guards internally) ── */
   initCounters();
 
-  /* ── §6 Scroll Reveal (all pages) ── */
+  /*  Scroll Reveal (all pages) ── */
   initScrollReveal();
 
-  /* ── §7 FAQ Accordion (contact.html — guards internally) ── */
+  /* FAQ Accordion (contact.html — guards internally) ── */
   initFaqAccordion();
 
-  /* ── §8 Price Table Accordion (services.html — guards internally) ── */
+  /*  Price Table Accordion (services.html — guards internally) ── */
   initPriceAccordion();
 
-  /* ── §9 Repair Form (services.html — guards internally) ── */
+  /*  Repair Form (services.html — guards internally) ── */
   initRepairForm();
 
-  /* ── §10 Contact Form (contact.html — guards internally) ── */
+  /*  Contact Form (contact.html — guards internally) ── */
   initContactForm();
 
-  /* ── §11 Active Nav Link (all pages) ── */
+  /*  Active Nav Link (all pages) ── */
   initActiveNav();
 
-  /* ── §12 Back-to-top (all pages) ── */
+  /* Back-to-top (all pages) ── */
   initBackToTop();
 });
-
-/* =============================================================================
-   §14 — WEB3FORMS API INTEGRATION
-   Both repair and contact forms submit to Web3Forms API for backend handling
-   ============================================================================= */
 
 function initWeb3Forms() {
   // Handle repair form (services.html)
