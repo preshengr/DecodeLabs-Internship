@@ -811,7 +811,9 @@ function initWeb3Forms() {
         const data = await response.json();
 
         if (response.ok) {
-          alert("Success! Your repair request has been received. We'll confirm your appointment within 2 hours.");
+          alert(
+            "Success! Your repair request has been received. We'll confirm your appointment within 2 hours.",
+          );
           repairForm.reset();
         } else {
           alert("Error: " + data.message);
